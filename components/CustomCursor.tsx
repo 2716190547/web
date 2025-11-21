@@ -6,14 +6,10 @@ const CustomCursor: React.FC = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  const dotSpringConfig = { damping: 25, stiffness: 2000, mass: 0.2 }; 
-  const ringSpringConfig = { damping: 35, stiffness: 800, mass: 0.5 }; 
+  const springConfig = { damping: 35, stiffness: 400, mass: 0.5 }; 
 
-  const dotX = useSpring(cursorX, dotSpringConfig);
-  const dotY = useSpring(cursorY, dotSpringConfig);
-  
-  const ringX = useSpring(cursorX, ringSpringConfig);
-  const ringY = useSpring(cursorY, ringSpringConfig);
+  const x = useSpring(cursorX, springConfig);
+  const y = useSpring(cursorY, springConfig);
 
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
@@ -56,37 +52,40 @@ const CustomCursor: React.FC = () => {
 
   return (
     <>
-      {/* Main Dot - Always visible */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center"
         style={{
-          x: dotX,
-          y: dotY,
+          x,
+          y,
           translateX: "-50%",
           translateY: "-50%",
-        }}
-      />
-      
-      {/* Outer Ring - Filled on Hover */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] mix-blend-difference"
-        style={{
-          x: ringX,
-          y: ringY,
-          translateX: "-50%",
-          translateY: "-50%",
-          borderRadius: "50%", 
         }}
         animate={{
-          width: isHovering ? 50 : 12, // Reduced sizes
-          height: isHovering ? 50 : 12, // Reduced sizes
-          opacity: isHovering ? 1 : 0,
-          backgroundColor: "white", // Filled white (becomes black via difference)
+          // Hover: Shrink to a small solid dot
+          // Normal: Larger outlined diamond
+          scale: isHovering ? 0.5 : 1,
+          rotate: 45, 
         }}
-        transition={{ 
-          type: "spring", stiffness: 300, damping: 25
-        }}
-      />
+      >
+        {/* The Visual Cursor Shape */}
+        <motion.div 
+          animate={{
+            width: isHovering ? 24 : 24,
+            height: isHovering ? 24 : 24,
+            backgroundColor: isHovering ? "#ccff00" : "transparent",
+            border: isHovering ? "none" : "2px solid white",
+          }}
+          className="transition-colors duration-200"
+        />
+        
+        {/* Optional Crosshair lines inside normal state */}
+        {!isHovering && (
+          <>
+            <div className="absolute w-[140%] h-[1px] bg-white/50 -rotate-45" />
+            <div className="absolute h-[140%] w-[1px] bg-white/50 -rotate-45" />
+          </>
+        )}
+      </motion.div>
     </>
   );
 };

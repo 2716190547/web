@@ -5,9 +5,10 @@ import { motion } from 'framer-motion';
 interface MagneticProps {
   children: React.ReactElement; // Expect a single React Element
   strength?: number; // How strong the pull is
+  className?: string; // Allow custom styling for the wrapper
 }
 
-export const Magnetic: React.FC<MagneticProps> = ({ children, strength = 30 }) => {
+export const Magnetic: React.FC<MagneticProps> = ({ children, strength = 30, className = "" }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -32,10 +33,11 @@ export const Magnetic: React.FC<MagneticProps> = ({ children, strength = 30 }) =
   return (
     <motion.div
       ref={ref}
+      className={className} 
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      transition={{ type: "spring", stiffness: 350, damping: 40, mass: 1 }} // Smoother, heavier feel
     >
       {React.cloneElement(children, {})} 
     </motion.div>

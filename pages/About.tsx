@@ -16,7 +16,7 @@ const About: React.FC = () => {
       <BackgroundShapes />
       
       {/* Background Element */}
-      <div className="absolute top-0 right-0 w-1/2 h-screen bg-ash/30 -skew-x-12 pointer-events-none z-0 opacity-50" />
+      <div className="absolute top-0 right-0 w-1/2 h-screen bg-surface/30 -skew-x-12 pointer-events-none z-0 opacity-50" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -88,7 +88,7 @@ const About: React.FC = () => {
                 ))}
              </div>
 
-             <div className="mt-20 p-8 bg-ash/50 backdrop-blur-md border border-white/10 rounded-[2rem] hover:border-neon/30 transition-colors duration-500 group">
+             <div className="mt-20 p-8 bg-surface/50 backdrop-blur-md border border-white/10 rounded-[2rem] hover:border-neon/30 transition-colors duration-500 group">
                 <h4 className="font-display text-xl text-white mb-6 flex items-center gap-2">
                    <span className="w-3 h-3 bg-grape rounded-full group-hover:animate-ping"></span>
                    RECOGNITION

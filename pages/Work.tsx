@@ -17,57 +17,57 @@ const projects = [
 
 const Work: React.FC = () => {
   return (
-    <div className="min-h-screen bg-transparent relative z-10 pt-32 pb-20 px-6 overflow-hidden">
+    <div className="min-h-screen bg-void relative z-10 pt-32 pb-20 px-6 overflow-hidden">
       <BackgroundShapes />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Reconstructed Header - Avant Garde Style */}
+        {/* Header */}
         <div className="relative pt-10 pb-24">
-           {/* Massive Watermark */}
-           <div className="absolute top-0 left-0 -translate-y-1/2 -translate-x-10 opacity-[0.03] font-display font-black text-[20vw] leading-none text-white pointer-events-none select-none">
+           <div className="absolute top-0 left-0 -translate-y-1/2 -translate-x-10 opacity-[0.02] font-display font-black text-[20vw] leading-none text-white pointer-events-none select-none">
              WORK
            </div>
 
            <div className="flex flex-col md:flex-row items-end justify-between gap-8 border-b border-white/10 pb-8 relative z-10">
              <div>
-                 <div className="flex items-center gap-4 mb-4 text-cyber font-mono text-sm tracking-widest uppercase">
+                 <div className="flex items-center gap-4 mb-4 text-neon font-mono text-sm tracking-widest uppercase">
                      <span className="animate-pulse">●</span>
                      <span>Project_Index</span>
-                     <span className="w-12 h-[1px] bg-cyber/50"></span>
+                     <span className="w-12 h-[1px] bg-neon/50"></span>
                      <span>Vol. 01</span>
                  </div>
                  <InteractiveTitle text="WORK ARCHIVE" size="large" className="text-white" />
              </div>
              <div className="flex flex-col items-end gap-2">
-                <p className="font-sans text-gray-400 max-w-md text-right pb-2 leading-relaxed">
+                <p className="font-sans text-gray-500 max-w-md text-right pb-2 leading-relaxed">
                     A curated collection of digital artifacts, web experiences, and visual experiments created in the void.
                 </p>
-                <div className="font-mono text-xs text-neon uppercase tracking-widest border border-neon/30 px-3 py-1 rounded-full">
+                <div className="font-mono text-xs text-white uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full">
                    Total Entries: {projects.length}
                 </div>
              </div>
            </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-20">
+        {/* Project Grid - INCREASED GAP between items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-48">
           {projects.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
-              className="group cursor-none interactive-target"
+              className="group cursor-none interactive-target flex flex-col"
             >
-              <TiltCard className="rounded-[2rem]" scale={1.03}>
+              <TiltCard className="rounded-[2rem]" scale={1.02}>
                 {/* Card Image Container - 16:9 Aspect Ratio */}
-                <div className="relative w-full aspect-video bg-ash rounded-[2rem] overflow-hidden border-2 border-transparent group-hover:border-neon/50 transition-colors duration-500">
+                <div className="relative w-full aspect-video bg-surface rounded-[2rem] overflow-hidden border border-white/10 group-hover:border-neon/50 transition-colors duration-500">
                   
                   <img 
                     src={item.img} 
                     alt={item.title} 
                     loading="lazy"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
                   />
 
                   {/* Button positioned at bottom right */}
@@ -86,12 +86,12 @@ const Work: React.FC = () => {
                 </div>
               </TiltCard>
               
-              {/* Project Info Below Card - Reduced spacing to 3 (0.75rem) */}
-              <div className="flex flex-col items-start mt-3 pl-2 transition-colors duration-300">
-                 <h3 className="font-display font-black text-3xl text-white group-hover:text-neon transition-colors tracking-tight">{item.title}</h3>
+              {/* Project Info - REDUCED SPACING (mt-2) */}
+              <div className="flex flex-col items-start mt-2 pl-2 transition-colors duration-300">
+                 <h3 className="font-display font-black text-3xl md:text-4xl text-white group-hover:text-neon transition-colors tracking-tight">{item.title}</h3>
                  <div className="flex items-center gap-3 mt-1">
-                   <span className="w-2 h-2 bg-cyber rounded-full"></span>
-                   <span className="font-mono font-bold text-xs md:text-sm text-gray-400 group-hover:text-white transition-colors tracking-wider">{item.category}</span>
+                   <span className="w-2 h-2 bg-neon rounded-full"></span>
+                   <span className="font-mono font-bold text-xs md:text-sm text-gray-500 group-hover:text-white transition-colors tracking-wider">{item.category}</span>
                  </div>
               </div>
             </motion.div>

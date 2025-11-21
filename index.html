@@ -17,11 +17,12 @@
               display: ['Syncopate', 'sans-serif'],
             },
             colors: {
-              'void': '#050505',
-              'ash': '#1a1a1a',
+              'void': '#000000',
+              'ash': '#0a0a0a', /* Darkened from #121212 */
               'neon': '#ccff00',
-              'cyber': '#00f0ff', // New accent color
-              'grape': '#bd00ff', // New accent color
+              'cyber': '#00f0ff',
+              'grape': '#B026FF', 
+              'surface': '#050505', /* Darkened from #1A1A1A */
             },
             cursor: {
               'none': 'none',
@@ -33,7 +34,7 @@
     <style>
       body {
         cursor: none; /* Hide default cursor for custom one */
-        background-color: #050505;
+        background-color: #000000;
         color: #ffffff;
         overflow-x: hidden;
       }
@@ -42,7 +43,7 @@
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #050505;
+        background: #000000;
       }
       ::-webkit-scrollbar-thumb {
         background: #333;
