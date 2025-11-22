@@ -79,12 +79,6 @@ export const BackgroundShapes: React.FC = () => {
          animate={{ y: [0, -80, 0], opacity: [0, 1, 0] }}
          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
        />
-       
-       <motion.div 
-         className="absolute top-[30%] right-[40%] w-4 h-4 bg-cyber rounded-sm"
-         animate={{ x: [0, 40, 0], rotate: [0, 180, 360] }}
-         transition={{ duration: 12, repeat: Infinity, delay: 3 }}
-       />
     </div>
   );
 };

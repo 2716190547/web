@@ -5,19 +5,22 @@ import { ArrowUpRight } from 'lucide-react';
 import { InteractiveTitle } from '../components/InteractiveTitle';
 import { TiltCard } from '../components/TiltCard';
 import { BackgroundShapes } from '../components/BackgroundShapes';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const projects = [
-  { id: 1, title: "CYBER STRUCTURE", category: "ARCHITECTURE", img: "https://picsum.photos/seed/arch/1920/1080" },
-  { id: 2, title: "MONO INTERFACE", category: "UI/UX", img: "https://picsum.photos/seed/ui/1920/1080" },
-  { id: 3, title: "LIQUID METAL", category: "3D RENDER", img: "https://picsum.photos/seed/3d/1920/1080" },
-  { id: 4, title: "TYPO GRAPHIC", category: "EDITORIAL", img: "https://picsum.photos/seed/type/1920/1080" },
-  { id: 5, title: "SPATIAL AUDIO", category: "SOUND DESIGN", img: "https://picsum.photos/seed/sound/1920/1080" },
-  { id: 6, title: "DATA VISUAL", category: "DEVELOPMENT", img: "https://picsum.photos/seed/dev/1920/1080" },
+  { id: 1, title: "CYBER STRUCTURE", category_en: "ARCHITECTURE", category_zh: "建筑", img: "https://picsum.photos/seed/arch/1920/1080" },
+  { id: 2, title: "MONO INTERFACE", category_en: "UI/UX", category_zh: "UI/UX", img: "https://picsum.photos/seed/ui/1920/1080" },
+  { id: 3, title: "LIQUID METAL", category_en: "3D RENDER", category_zh: "3D渲染", img: "https://picsum.photos/seed/3d/1920/1080" },
+  { id: 4, title: "TYPO GRAPHIC", category_en: "EDITORIAL", category_zh: "排版", img: "https://picsum.photos/seed/type/1920/1080" },
+  { id: 5, title: "SPATIAL AUDIO", category_en: "SOUND DESIGN", category_zh: "音效设计", img: "https://picsum.photos/seed/sound/1920/1080" },
+  { id: 6, title: "DATA VISUAL", category_en: "DEVELOPMENT", category_zh: "开发", img: "https://picsum.photos/seed/dev/1920/1080" },
 ];
 
 const Work: React.FC = () => {
+  const { t, language } = useLanguage();
+
   return (
-    <div className="min-h-screen bg-void relative z-10 pt-32 pb-20 px-6 overflow-hidden">
+    <div className="min-h-screen bg-transparent relative z-10 pt-32 pb-20 px-6 overflow-hidden">
       <BackgroundShapes />
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -25,32 +28,32 @@ const Work: React.FC = () => {
         {/* Header */}
         <div className="relative pt-10 pb-24">
            <div className="absolute top-0 left-0 -translate-y-1/2 -translate-x-10 opacity-[0.02] font-display font-black text-[20vw] leading-none text-white pointer-events-none select-none">
-             WORK
+             {t.work.bg_title}
            </div>
 
            <div className="flex flex-col md:flex-row items-end justify-between gap-8 border-b border-white/10 pb-8 relative z-10">
              <div>
                  <div className="flex items-center gap-4 mb-4 text-neon font-mono text-sm tracking-widest uppercase">
                      <span className="animate-pulse">●</span>
-                     <span>Project_Index</span>
+                     <span>{t.work.index_label}</span>
                      <span className="w-12 h-[1px] bg-neon/50"></span>
                      <span>Vol. 01</span>
                  </div>
-                 <InteractiveTitle text="WORK ARCHIVE" size="large" className="text-white" />
+                 <InteractiveTitle text={t.work.title} size="large" className="text-white" />
              </div>
              <div className="flex flex-col items-end gap-2">
                 <p className="font-sans text-gray-500 max-w-md text-right pb-2 leading-relaxed">
-                    A curated collection of digital artifacts, web experiences, and visual experiments created in the void.
+                    {t.work.desc}
                 </p>
                 <div className="font-mono text-xs text-white uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full">
-                   Total Entries: {projects.length}
+                   {t.work.total_entries}: {projects.length}
                 </div>
              </div>
            </div>
         </div>
 
-        {/* Project Grid - INCREASED GAP between items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-48">
+        {/* Project Grid - OPTIMIZED GAP */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
           {projects.map((item, index) => (
             <motion.div
               key={item.id}
@@ -91,7 +94,9 @@ const Work: React.FC = () => {
                  <h3 className="font-display font-black text-3xl md:text-4xl text-white group-hover:text-neon transition-colors tracking-tight">{item.title}</h3>
                  <div className="flex items-center gap-3 mt-1">
                    <span className="w-2 h-2 bg-neon rounded-full"></span>
-                   <span className="font-mono font-bold text-xs md:text-sm text-gray-500 group-hover:text-white transition-colors tracking-wider">{item.category}</span>
+                   <span className="font-mono font-bold text-xs md:text-sm text-gray-500 group-hover:text-white transition-colors tracking-wider">
+                    {language === 'zh' ? item.category_zh : item.category_en}
+                   </span>
                  </div>
               </div>
             </motion.div>

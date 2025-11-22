@@ -1,11 +1,19 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, AlertCircle, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Send, Sparkles, AlertCircle, Copy, Check, Mail, Phone, MessageSquare } from 'lucide-react';
 import { generateChatResponse } from '../services/geminiService';
 import { InteractiveTitle } from '../components/InteractiveTitle';
 import { Magnetic } from '../components/Magnetic';
 import { BackgroundShapes } from '../components/BackgroundShapes';
+import { useLanguage } from '../contexts/LanguageContext';
+
+// Custom WeChat Icon Component with specific path shape
+const WeChatIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 1024 1024" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+     <path d="M664.250054 368.541681c10.015098 0 19.892049 0.732687 29.67281 1.795902-26.647917-122.810047-159.358451-214.077703-310.826188-214.077703-169.353083 0-308.085774 114.232694-308.085774 259.274068 0 83.708494 46.165436 152.460344 123.281791 205.78483l-30.80868 91.730191 107.688651-53.455469c38.558178 7.53665 69.459978 15.308661 107.924012 15.308661 9.66308 0 19.230993-0.470721 28.752858-1.225921-6.025227-20.36584-9.521864-41.723264-9.521864-63.862493C402.328693 476.632491 517.908058 368.541681 664.250054 368.541681zM498.62897 285.87389c23.200398 0 38.557154 15.120372 38.557154 38.061874 0 22.846334-15.356756 38.156018-38.557154 38.156018-23.107277 0-46.260603-15.309684-46.260603-38.156018C452.368366 300.994262 475.522716 285.87389 498.62897 285.87389zM283.016307 362.090758c-23.107277 0-46.402843-15.309684-46.402843-38.156018 0-22.941502 23.295566-38.061874 46.402843-38.061874 23.081695 0 38.46301 15.120372 38.46301 38.061874C321.479317 346.782098 306.098002 362.090758 283.016307 362.090758zM945.448458 606.151333c0-121.888048-123.258255-221.236753-261.683954-221.236753-146.57838 0-262.015505 99.348706-262.015505 221.236753 0 122.06508 115.437126 221.200938 262.015505 221.200938 30.66644 0 61.617359-7.609305 92.423993-15.262612l84.513836 45.786813-23.178909-76.17082C899.379213 735.776599 945.448458 674.90216 945.448458 606.151333zM598.803483 567.994292c-15.332197 0-30.807656-15.096836-30.807656-30.501688 0-15.190981 15.47546-30.477129 30.807656-30.477129 23.295566 0 38.558178 15.286148 38.558178 30.477129C637.361661 552.897456 622.099049 567.994292 598.803483 567.994292zM768.25071 567.994292c-15.213493 0-30.594809-15.096836-30.594809-30.501688 0-15.190981 15.381315-30.477129 30.594809-30.477129 23.107277 0 38.558178 15.286148 38.558178 30.477129C806.808888 552.897456 791.357987 567.994292 768.25071 567.994292z" />
+  </svg>
+);
 
 interface Message {
   role: 'user' | 'ai' | 'error';
@@ -13,13 +21,20 @@ interface Message {
 }
 
 const Contact: React.FC = () => {
+  const { t, language } = useLanguage();
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'ai', text: "SYSTEM ONLINE. I am Sean's digital construct. Query database?" }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [copied, setCopied] = useState(false);
+  // Track which item was last copied
+  const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const initializedRef = useRef(false);
+
+  // Initialize chat message on mount or language change, but prevent duplicates if strictly necessary
+  // For simplicity, we'll just clear and reset on language change to simulate "System Reboot" in new language
+  useEffect(() => {
+    setMessages([{ role: 'ai', text: t.contact.ai.welcome }]);
+  }, [language, t.contact.ai.welcome]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -36,27 +51,39 @@ const Contact: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const aiResponse = await generateChatResponse(userMsg);
+      const aiResponse = await generateChatResponse(userMsg, language);
       setMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
     } catch (error) {
       console.error("Chat Error:", error);
       setMessages(prev => [...prev, { 
         role: 'error', 
-        text: "CONNECTION LOST. Neural link unstable. Please contact via email." 
+        text: t.contact.ai.error
       }]);
     } finally {
       setIsTyping(false);
     }
   };
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("hello@seanzeng.design");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedItem(id);
+    setTimeout(() => setCopiedItem(null), 2000);
   };
 
+  const contactMethods = [
+    { id: 'email', label: t.contact.labels.mail, value: '2716190547@qq.com', icon: Mail },
+    { id: 'wechat', label: t.contact.labels.wechat, value: 'zsc4253', icon: WeChatIcon },
+    { id: 'phone', label: t.contact.labels.phone, value: '15985892442', icon: Phone }
+  ];
+
+  const decorativeStats = [
+      { label: t.contact.stats.encryption, value: "256-BIT" },
+      { label: t.contact.stats.location, value: "CN/ZHEJIANG" },
+      { label: t.contact.stats.status, value: t.contact.stats.available },
+  ];
+
   return (
-    <div className="min-h-screen bg-void pt-24 pb-12 px-4 md:px-6 flex flex-col items-center justify-center relative z-10 overflow-hidden">
+    <div className="min-h-screen bg-transparent pt-24 pb-12 px-4 md:px-6 flex flex-col items-center justify-center relative z-10 overflow-hidden">
       <BackgroundShapes />
       
       {/* Layout Container */}
@@ -70,67 +97,64 @@ const Contact: React.FC = () => {
         >
           {/* Unified Title */}
           <div className="border-l-[6px] border-neon pl-6 md:pl-8 py-2 mb-10 md:mb-14">
-            {/* Changed size to medium to prevent overflow on smaller screens */}
-            <InteractiveTitle text="GET CONNECTED" size="medium" align="left" className="text-white break-words" />
+            <InteractiveTitle text={t.contact.title} size="medium" align="left" className="text-white break-words" />
             <p className="mt-6 font-sans font-bold text-gray-400 text-lg md:text-xl tracking-tight max-w-lg">
-              INITIATE COLLABORATION PROTOCOLS.
+              {t.contact.subtitle_1}
               <br/>
-              <span className="text-sm font-mono text-gray-600">RESPONSE TIME: &lt; 24 HOURS</span>
+              <span className="text-sm font-mono text-gray-600">{t.contact.subtitle_2}</span>
             </p>
           </div>
 
-          <div className="space-y-8 md:space-y-10 w-full">
+          <div className="space-y-6 w-full">
              
-             {/* Email Button - Removed Magnetic wrapper per request */}
-             <button 
-               onClick={copyEmail}
-               className="group w-full relative overflow-hidden rounded-[2rem] md:rounded-[3rem] border border-white/20 bg-transparent interactive-target select-none transform transition-transform duration-300 active:scale-[0.98]"
-             >
-               {/* Fill Effect - Slide Up from Bottom */}
-               <div className="absolute inset-0 bg-neon translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1] will-change-transform" />
-               
-               <div className="relative z-10 flex items-center justify-between p-6 md:p-10 gap-6 w-full">
+             {contactMethods.map((method) => (
+                <button 
+                  key={method.id}
+                  onClick={() => copyToClipboard(method.value, method.id)}
+                  className="group w-full relative overflow-hidden rounded-[2rem] border border-white/20 bg-surface/50 interactive-target select-none transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  {/* Fill Effect - Slide Left to Right */}
+                  <div className="absolute inset-0 bg-neon -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-[0.16,1,0.3,1] will-change-transform" />
                   
-                  {/* Text Container - Ensures left alignment and wrapping */}
-                  <span className="flex-1 font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white group-hover:text-black transition-colors duration-300 text-left leading-[0.9] break-all">
-                    HELLO@SEANZENG.DESIGN
-                  </span>
-                  
-                  {/* Icon Container - Pinned to Right */}
-                  <div className="shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-full bg-white/10 group-hover:bg-black flex items-center justify-center transition-all duration-300 group-hover:scale-110 border border-transparent group-hover:border-black">
-                    {copied ? (
-                      <Check className="w-6 h-6 md:w-8 md:h-8 text-neon" />
-                    ) : (
-                      <Copy className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-neon transition-colors" />
-                    )}
-                  </div>
+                  <div className="relative z-10 flex items-center justify-between p-6 gap-4 w-full">
+                      
+                      <div className="flex items-center gap-6 overflow-hidden">
+                          <div className="w-12 h-12 rounded-full bg-white/10 group-hover:bg-black flex items-center justify-center transition-colors duration-300 shrink-0">
+                              <method.icon className="w-6 h-6 text-white group-hover:text-neon transition-colors" />
+                          </div>
+                          <div className="flex flex-col items-start overflow-hidden">
+                              <span className="font-mono text-xs text-gray-500 group-hover:text-black/60 tracking-widest uppercase transition-colors mb-1">
+                                  {method.label}
+                              </span>
+                              <span className="font-display font-black text-xl sm:text-2xl md:text-3xl text-white group-hover:text-black transition-colors duration-300 truncate w-full text-left">
+                                  {method.value}
+                              </span>
+                          </div>
+                      </div>
+                      
+                      {/* Copy Icon Status */}
+                      <div className="shrink-0">
+                        {copiedItem === method.id ? (
+                          <div className="flex items-center gap-2 bg-black/10 px-3 py-1 rounded-full">
+                             <Check className="w-5 h-5 text-green-500 group-hover:text-black" />
+                             <span className="text-xs font-bold text-green-500 group-hover:text-black hidden sm:inline">{t.contact.labels.copied}</span>
+                          </div>
+                        ) : (
+                          <Copy className="w-6 h-6 text-gray-600 group-hover:text-black/40 transition-colors" />
+                        )}
+                      </div>
 
-               </div>
-             </button>
+                  </div>
+                </button>
+             ))}
              
-             {/* Animate Copy Feedback */}
-             <AnimatePresence>
-               {copied && (
-                 <motion.div
-                   initial={{ opacity: 0, y: -10 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   exit={{ opacity: 0 }}
-                   className="text-neon font-mono font-bold text-sm pl-4"
-                 >
-                   /// ADDRESS COPIED TO CLIPBOARD
-                 </motion.div>
-               )}
-             </AnimatePresence>
-             
-             {/* Social Links */}
+             {/* Decorative Stats Row (Non-clickable) */}
              <div className="flex flex-wrap gap-3 md:gap-4 pt-4">
-                {['INSTAGRAM', 'TWITTER', 'LINKEDIN'].map((social) => (
-                   <Magnetic key={social} strength={30}>
-                     <a href="#" className="inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-surface text-white font-bold font-mono text-xs md:text-sm hover:bg-white hover:text-black transition-colors interactive-target rounded-full border border-white/10 hover:border-white group">
-                        {social}
-                        <ArrowUpRight className="w-3 h-3 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                     </a>
-                   </Magnetic>
+                {decorativeStats.map((stat) => (
+                   <div key={stat.label} className="inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-surface/30 text-gray-500 font-bold font-mono text-xs md:text-sm rounded-full border border-white/5 cursor-default select-none hover:border-white/20 hover:text-gray-300 transition-colors">
+                      <span className="text-neon mr-2">●</span>
+                      {stat.label}: <span className="ml-2 text-gray-300">{stat.value}</span>
+                   </div>
                 ))}
              </div>
           </div>
@@ -147,7 +171,7 @@ const Contact: React.FC = () => {
           <div className="p-6 bg-neon text-black flex items-center justify-between">
              <div className="flex items-center gap-3">
                 <Sparkles className="w-5 h-5 fill-black" />
-                <span className="font-display font-black text-sm md:text-lg tracking-wider">SEAN_AI_TWIN // v2.5</span>
+                <span className="font-display font-black text-sm md:text-lg tracking-wider">{t.contact.ai.title}</span>
              </div>
              <div className="flex gap-2">
                <div className="w-3 h-3 bg-black rounded-full opacity-50" />
@@ -190,7 +214,7 @@ const Contact: React.FC = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="ENTER COMMAND..."
+                  placeholder={t.contact.ai.placeholder}
                   className="w-full bg-black border border-white/10 p-4 text-white font-mono focus:outline-none focus:border-cyber focus:bg-black transition-colors placeholder:text-gray-700 text-sm md:text-base rounded-[1rem]"
                />
                <button 

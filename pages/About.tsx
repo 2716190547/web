@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { InteractiveTitle } from '../components/InteractiveTitle';
 import { Magnetic } from '../components/Magnetic';
 import { BackgroundShapes } from '../components/BackgroundShapes';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const skills = [
   "ART DIRECTION", "UI/UX DESIGN", "REACT / NEXT.JS", 
@@ -11,103 +12,166 @@ const skills = [
 ];
 
 const About: React.FC = () => {
+  const { t } = useLanguage();
+
+  const experience = [
+    {
+      company: "YIDIAN TECH",
+      role: t.about.jobs.google.role,
+      period: "2024 - PRESENT",
+      desc: t.about.jobs.google.desc
+    },
+    {
+      company: "MEITU",
+      role: t.about.jobs.basic.role,
+      period: "2023 - 2024",
+      desc: t.about.jobs.basic.desc
+    },
+    {
+      company: "CATPAI",
+      role: t.about.jobs.freelance.role,
+      period: "2023",
+      desc: t.about.jobs.freelance.desc
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-void pt-32 pb-20 px-6 overflow-hidden relative">
+    <div className="min-h-screen bg-transparent pt-32 pb-20 px-6 overflow-hidden relative">
       <BackgroundShapes />
       
-      {/* Background Element */}
-      <div className="absolute top-0 right-0 w-1/2 h-screen bg-surface/30 -skew-x-12 pointer-events-none z-0 opacity-50" />
+      {/* Background Element - Clean Vertical Column */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-white/[0.02] border-l border-white/5 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Reconstructed Header - Avant Garde Style */}
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative pt-10 pb-24"
+          className="relative pt-10 pb-16 border-b border-white/10 mb-12 md:mb-20"
         >
            {/* Massive Watermark */}
            <div className="absolute top-0 left-0 -translate-y-1/2 -translate-x-10 opacity-[0.03] font-display font-black text-[20vw] leading-none text-white pointer-events-none select-none">
-             PROFILE
+             {t.about.bg_title}
            </div>
 
-           <div className="flex flex-col justify-end gap-8 border-b border-white/10 pb-8 relative z-10">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-end w-full gap-8">
-                 <div>
-                    <div className="font-mono text-neon text-xs mb-4 tracking-[0.2em] uppercase">/// Identity_Matrix</div>
-                    <InteractiveTitle text="PROFILE & DATA" size="large" className="text-white" />
-                 </div>
-                 
-                 <div className="hidden md:block font-mono text-right text-xs text-gray-400 space-y-1 border-l border-white/20 pl-4">
-                     <div className="flex justify-between gap-8"><span>ID</span> <span className="text-white">SEAN_ZENG</span></div>
-                     <div className="flex justify-between gap-8"><span>CLASS</span> <span className="text-white">DESIGNER</span></div>
-                     <div className="flex justify-between gap-8"><span>STATUS</span> <span className="text-neon animate-pulse">ONLINE</span></div>
-                 </div>
+           <div className="flex flex-col md:flex-row md:justify-between md:items-end w-full gap-8 relative z-10">
+              <div>
+                 <div className="font-mono text-neon text-xs mb-4 tracking-[0.2em] uppercase">{t.about.identity_matrix}</div>
+                 <InteractiveTitle text={t.about.title} size="large" className="text-white" />
+              </div>
+              
+              <div className="hidden md:block font-mono text-right text-xs text-gray-400 space-y-1 border-l border-white/20 pl-4">
+                  <div className="flex justify-between gap-8"><span>{t.about.id_label}</span> <span className="text-white">SEAN_ZENG</span></div>
+                  <div className="flex justify-between gap-8"><span>{t.about.class_label}</span> <span className="text-white">{t.about.class_value}</span></div>
+                  <div className="flex justify-between gap-8"><span>{t.about.status_label}</span> <span className="text-neon animate-pulse">{t.about.status_value}</span></div>
               </div>
            </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        {/* Grid Layout - 12 Columns for Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-0 md:gap-x-16">
+          
+          {/* Left Column: Biography & Experience (Spans 7 cols) */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="space-y-8"
+            className="md:col-span-7 flex flex-col gap-8 md:gap-12"
           >
-            <p className="font-sans font-bold text-2xl md:text-4xl text-white leading-tight">
-              I am a multidisciplinary designer and developer obsessed with the space where code meets chaos.
-            </p>
-            <p className="font-sans text-gray-400 text-lg leading-relaxed">
-              My work is not just about visuals; it's about feeling. I craft digital experiences that are visceral, memorable, and slightly rebellious. With a background in both traditional graphic design and modern web engineering, I bridge the gap between static art and interactive performance.
-            </p>
-            <p className="font-sans text-gray-400 text-lg leading-relaxed">
-              Currently based in the digital void, working with clients worldwide to push the boundaries of the browser.
-            </p>
+            <div className="flex flex-col gap-8">
+              <h2 className="font-display font-black text-3xl md:text-5xl text-white leading-tight">
+                {t.about.bio_p1_start} <span className="text-neon">{t.about.bio_p1_highlight}</span> {t.about.bio_p1_end}
+              </h2>
+              <div className="font-sans text-gray-400 text-lg md:text-xl leading-relaxed space-y-6 text-justify">
+                <p>{t.about.bio_desc_1}</p>
+                <p>{t.about.bio_desc_2}</p>
+                {t.about.bio_desc_3 && <p>{t.about.bio_desc_3}</p>}
+                {t.about.bio_desc_4 && <p>{t.about.bio_desc_4}</p>}
+              </div>
+              
+              {/* Signature / Decorative Line */}
+              <div className="pt-4">
+                  <div className="h-1 w-24 bg-neon" />
+              </div>
+            </div>
+
+            {/* Experience Section */}
+            <div className="mt-8 md:mt-12">
+              <h3 className="font-mono text-xs font-bold text-neon mb-8 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-2 h-2 bg-neon rounded-full"></span>
+                {t.about.professional_log}
+              </h3>
+              <div className="space-y-12">
+                {experience.map((job, idx) => (
+                  <div key={idx} className="group relative pl-8 border-l border-white/10 hover:border-neon transition-colors duration-300">
+                     <div className="absolute left-[-5px] top-0 w-2 h-2 bg-black border border-white/20 rounded-full group-hover:bg-neon group-hover:border-neon transition-colors" />
+                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                        <h4 className="font-display font-bold text-2xl text-white">{job.company}</h4>
+                        <span className="font-mono text-xs text-gray-500">{job.period}</span>
+                     </div>
+                     <div className="text-neon font-mono text-xs uppercase tracking-wider mb-4">{job.role}</div>
+                     <p className="font-sans text-gray-400 text-sm leading-relaxed max-w-xl">{job.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Decorative Visual Section (Formerly Clients) */}
+            <div className="mt-12 border-t border-white/10 pt-12">
+               <h3 className="font-mono text-xs font-bold text-neon mb-8 uppercase tracking-widest flex items-center gap-2">
+                  <span className="w-2 h-2 bg-neon rounded-full"></span>
+                  {t.about.select_clients}
+               </h3>
+               
+               {/* Decorative Signal Visualizer */}
+               <div className="relative w-full h-32 bg-surface/30 border border-white/5 rounded-lg overflow-hidden flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-end justify-between px-4 pb-4 opacity-30">
+                    {Array.from({ length: 40 }).map((_, i) => (
+                       <motion.div 
+                          key={i}
+                          className="w-1 md:w-2 bg-neon"
+                          animate={{ height: [10, 40 + Math.random() * 60, 10] }}
+                          transition={{ 
+                             duration: 1.5, 
+                             repeat: Infinity, 
+                             ease: "easeInOut",
+                             delay: Math.random() * 1
+                          }}
+                       />
+                    ))}
+                  </div>
+                  <div className="z-10 font-mono text-xs md:text-sm text-neon tracking-[0.5em] uppercase mix-blend-difference">
+                     AESTHETICS_DATA_STREAM
+                  </div>
+               </div>
+            </div>
           </motion.div>
 
+          {/* Right Column: Stats & Specs (Spans 4 cols, offset 1) */}
           <motion.div
              initial={{ opacity: 0, x: 50 }}
              animate={{ opacity: 1, x: 0 }}
              transition={{ delay: 0.4, duration: 0.8 }}
+             className="md:col-span-4 md:col-start-9 flex flex-col gap-16"
           >
-             <h3 className="font-display font-bold text-2xl text-neon mb-8 uppercase tracking-widest flex items-center gap-4">
-                Core Capabilities
-                <span className="h-[1px] flex-grow bg-neon/30"></span>
-             </h3>
-             <div className="flex flex-wrap gap-4 md:gap-6">
-                {skills.map((skill, idx) => (
-                  <Magnetic key={idx} strength={40}>
-                    <motion.div 
-                      whileHover={{ scale: 1.1, backgroundColor: '#ccff00', color: '#000000', borderColor: '#ccff00' }}
-                      className="inline-block px-6 py-3 border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white font-bold font-mono text-sm md:text-base uppercase cursor-default transition-colors interactive-target rounded-full"
-                    >
-                      {skill}
-                    </motion.div>
-                  </Magnetic>
-                ))}
+             {/* Skills Section - Redesigned as Technical List */}
+             <div>
+                 <h3 className="font-mono text-xs font-bold text-neon mb-6 uppercase tracking-widest flex items-center gap-2">
+                    <span className="w-2 h-2 bg-neon rounded-full"></span>
+                    {t.about.system_capabilities}
+                 </h3>
+                 <div className="space-y-4">
+                    {skills.map((skill, idx) => (
+                        <div key={idx} className="group flex items-center justify-between border-b border-white/10 pb-3 hover:border-neon/50 transition-colors interactive-target cursor-default">
+                            <span className="font-sans font-bold text-white text-sm md:text-base group-hover:translate-x-2 transition-transform duration-300">{skill}</span>
+                            <span className="text-[10px] font-mono text-gray-600 group-hover:text-neon">v{2 + idx}.0</span>
+                        </div>
+                    ))}
+                 </div>
              </div>
 
-             <div className="mt-20 p-8 bg-surface/50 backdrop-blur-md border border-white/10 rounded-[2rem] hover:border-neon/30 transition-colors duration-500 group">
-                <h4 className="font-display text-xl text-white mb-6 flex items-center gap-2">
-                   <span className="w-3 h-3 bg-grape rounded-full group-hover:animate-ping"></span>
-                   RECOGNITION
-                </h4>
-                <ul className="space-y-6 font-mono text-gray-400 text-sm">
-                   <li className="flex justify-between items-center border-b border-white/5 pb-4">
-                      <span className="text-white font-bold">Awwwards</span> 
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">Site of the Day x2</span>
-                   </li>
-                   <li className="flex justify-between items-center border-b border-white/5 pb-4">
-                      <span className="text-white font-bold">CSS Design Awards</span> 
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">Best UI</span>
-                   </li>
-                   <li className="flex justify-between items-center">
-                      <span className="text-white font-bold">Behance</span> 
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">Featured in Interaction</span>
-                   </li>
-                </ul>
-             </div>
           </motion.div>
         </div>
       </div>

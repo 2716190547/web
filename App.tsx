@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import CustomCursor from './components/CustomCursor';
 import { PageTransition } from './components/PageTransition';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 // Scroll restoration component
 const ScrollToTop = () => {
@@ -39,17 +40,32 @@ const BackgroundGradient = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-void">
+      {/* Base Radial Gradient for Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#111111] to-void opacity-80" />
+
       {/* Technical Grid Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.03]" 
         style={{ 
-          backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`, 
-          backgroundSize: '50px 50px' 
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)`, 
+          backgroundSize: '100px 100px' 
         }} 
       />
       
+      {/* Fine Dot Matrix Texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+           backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 0)',
+           backgroundSize: '24px 24px'
+        }}
+      />
+
       {/* Noise Texture for grain */}
-      <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] grayscale" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] grayscale mix-blend-overlay" />
+      
+      {/* Vignette to focus center */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_10%,rgba(0,0,0,0.8)_120%)] pointer-events-none" />
 
       {/* Flashlight Effect */}
       <motion.div
@@ -59,7 +75,7 @@ const BackgroundGradient = () => {
           y,
           translateX: '-50%',
           translateY: '-50%',
-          background: 'radial-gradient(circle, rgba(204,255,0,0.1) 0%, rgba(5,5,5,0) 60%)',
+          background: 'radial-gradient(circle, rgba(204,255,0,0.08) 0%, rgba(5,5,5,0) 60%)',
         }}
       />
     </div>
@@ -111,13 +127,15 @@ const AnimatedRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-       <ScrollToTop />
-       <BackgroundGradient />
-       <CustomCursor />
-       <Navigation />
-       <AnimatedRoutes />
-    </Router>
+    <LanguageProvider>
+      <Router>
+         <ScrollToTop />
+         <BackgroundGradient />
+         <CustomCursor />
+         <Navigation />
+         <AnimatedRoutes />
+      </Router>
+    </LanguageProvider>
   );
 };
 

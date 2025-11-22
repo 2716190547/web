@@ -2,21 +2,27 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navigation: React.FC = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
   
   const links = [
-    { path: '/', label: 'Home' },
-    { path: '/work', label: 'Work' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/', label: t.nav.home },
+    { path: '/work', label: t.nav.work },
+    { path: '/about', label: t.nav.about },
+    { path: '/contact', label: t.nav.contact },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'zh' : 'en');
+  };
 
   return (
     <>
@@ -29,7 +35,7 @@ const Navigation: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <Link 
               key={link.path} 
@@ -42,15 +48,34 @@ const Navigation: React.FC = () => {
               )}
             </Link>
           ))}
+          
+          <div className="w-[1px] h-6 bg-white/20 mx-2" />
+
+          <button 
+            onClick={toggleLanguage}
+            className="font-mono text-xs font-bold uppercase tracking-wider hover:text-neon transition-colors interactive-target flex items-center gap-2"
+          >
+            <Globe className="w-4 h-4" />
+            <span>{language === 'en' ? 'CN' : 'EN'}</span>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          onClick={toggleMenu}
-          className="md:hidden interactive-target p-2 text-white hover:text-neon transition-colors z-50"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+           <button 
+            onClick={toggleLanguage}
+            className="font-mono text-xs font-bold uppercase tracking-wider hover:text-neon transition-colors interactive-target"
+          >
+            {language === 'en' ? 'CN' : 'EN'}
+          </button>
+          
+          <button 
+            onClick={toggleMenu}
+            className="interactive-target p-2 text-white hover:text-neon transition-colors z-50"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation Overlay */}
