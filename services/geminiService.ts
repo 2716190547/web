@@ -1,12 +1,23 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize the Gemini API client
-// The API key is securely accessed via process.env.API_KEY
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Initialize the Gemini API client lazily
+let ai: GoogleGenAI | null = null;
+
+const getAI = () => {
+  if (!ai && process.env.API_KEY) {
+    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  }
+  return ai;
+};
 
 export const generateChatResponse = async (userMessage: string, language: 'en' | 'zh'): Promise<string> => {
   try {
+    const apiClient = getAI();
+    if (!apiClient) {
+      throw new Error('API Key not configured');
+    }
+    
     const model = 'gemini-2.5-flash';
     
     const systemInstruction = language === 'zh'
@@ -23,7 +34,7 @@ export const generateChatResponse = async (userMessage: string, language: 'en' |
          Do not be overly enthusiastic. Be cool.
          IMPORTANT: Respond in English.`;
 
-    const response = await ai.models.generateContent({
+    const response = await apiClient.models.generateContent({
       model: model,
       contents: userMessage,
       config: {
