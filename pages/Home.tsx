@@ -53,7 +53,7 @@ const projects = [
     category_en: "UI - OVERSEAS/TOOL",
     category_zh: "UI - 海外/工具",
     year: "2024",
-    img: "/image/cover/AirBrush.png",
+    img: "./image/cover/AirBrush.png",
     path: "/work/airbrush"
   },
   {
@@ -62,7 +62,7 @@ const projects = [
     category_en: "AI COMPANY SITE",
     category_zh: "AI 公司官网",
     year: "2024",
-    img: "/image/cover/Cat Pi 官网.png",
+    img: "./image/cover/Cat Pi 官网.png",
     path: "/work/catpi"
   },
   {
@@ -71,7 +71,7 @@ const projects = [
     category_en: "3D WORKS",
     category_zh: "3D 作品展示",
     year: "2024",
-    img: "/image/cover/3D展示.png",
+    img: "./image/cover/3D展示.png",
     path: "/work/3d-showcase"
   },
   {
@@ -80,7 +80,7 @@ const projects = [
     category_en: "WEB DESIGN",
     category_zh: "响应式设计",
     year: "2024",
-    img: "/image/cover/响应式网站设计.png",
+    img: "./image/cover/响应式网站设计.png",
     path: "/work/responsive-web"
   },
 ];

@@ -14,7 +14,7 @@ const projects = [
     title: "AirBrush",
     category_en: "UI - OVERSEAS/TOOL REDESIGN",
     category_zh: "UI-海外项目/工具类改版",
-    img: "/image/cover/AirBrush.png",
+    img: "./image/cover/AirBrush.png",
     path: "/work/airbrush"
   },
   {
@@ -22,7 +22,7 @@ const projects = [
     title: "Cat Pi",
     category_en: "AI COMPANY WEBSITE",
     category_zh: "AI 公司官网",
-    img: "/image/cover/Cat Pi 官网.png",
+    img: "./image/cover/Cat Pi 官网.png",
     path: "/work/catpi"
   },
   {
@@ -30,7 +30,7 @@ const projects = [
     title: "3D展示",
     category_en: "3D WORKS SHOWCASE",
     category_zh: "部分3d 作品展示",
-    img: "/image/cover/3D展示.png",
+    img: "./image/cover/3D展示.png",
     path: "/work/3d-showcase"
   },
   {
@@ -38,7 +38,7 @@ const projects = [
     title: "响应式网站设计",
     category_en: "RESPONSIVE WEB DESIGN",
     category_zh: "多端适配设计",
-    img: "/image/cover/响应式网站设计.png",
+    img: "./image/cover/响应式网站设计.png",
     path: "/work/responsive-web"
   },
   {
@@ -46,7 +46,7 @@ const projects = [
     title: "运营活动设计",
     category_en: "CAMPAIGN DESIGN",
     category_zh: "咚咚历程挑战",
-    img: "/image/cover/运营活动设计.png",
+    img: "./image/cover/运营活动设计.png",
     path: "/work/campaign"
   },
   {
@@ -54,7 +54,7 @@ const projects = [
     title: "鱿鲜烧",
     category_en: "BRAND VISUAL DESIGN",
     category_zh: "品牌视觉设计",
-    img: "/image/cover/品牌视觉设计.png",
+    img: "./image/cover/品牌视觉设计.png",
     path: "/work/brand-visual"
   },
 ];

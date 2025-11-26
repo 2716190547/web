@@ -83,7 +83,7 @@ const ThreeDShowcaseCaseStudy: React.FC = () => {
                                 className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-neon/30 transition-all duration-300"
                             >
                                 <img
-                                    src={`/image/3D展示/${num}.png`}
+                                    src={`./image/3D展示/${num}.png`}
                                     alt={`3D Showcase - ${num}`}
                                     className="w-full h-auto object-contain"
                                     loading={index < 3 ? 'eager' : 'lazy'}

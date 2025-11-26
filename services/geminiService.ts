@@ -17,9 +17,9 @@ export const generateChatResponse = async (userMessage: string, language: 'en' |
     if (!apiClient) {
       throw new Error('API Key not configured');
     }
-    
+
     const model = 'gemini-2.5-flash';
-    
+
     const systemInstruction = language === 'zh'
       ? `You are the AI digital twin of Sean Zeng, an avant-garde graphic designer and web developer. 
          Your tone is minimalist, sophisticated, slightly cryptic but helpful. 

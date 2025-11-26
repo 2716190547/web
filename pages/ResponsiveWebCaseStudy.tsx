@@ -83,7 +83,7 @@ const ResponsiveWebCaseStudy: React.FC = () => {
                                 className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-neon/30 transition-all duration-300"
                             >
                                 <img
-                                    src={`/image/响应式网站设计/${num}.png`}
+                                    src={`./image/响应式网站设计/${num}.png`}
                                     alt={`Responsive Web Design - ${num}`}
                                     className="w-full h-auto object-contain"
                                     loading={index < 3 ? 'eager' : 'lazy'}
