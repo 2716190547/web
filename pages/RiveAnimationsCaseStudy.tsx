@@ -19,7 +19,7 @@ interface AnimationCardProps {
 const AnimationCard: React.FC<AnimationCardProps> = ({ id, title_en, title_zh, description, coverImage }) => {
     const { language } = useLanguage();
     const isZh = language === 'zh';
-    
+
     return (
         <Link to={`/work/rive-animations/${id}`}>
             <div className="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-neon/30 transition-all duration-300 cursor-pointer h-full">
@@ -68,7 +68,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
     const animations = [
         {
             id: 'western-wasteland',
-            src: '/web/assets/西部废土.riv',
+            src: './assets/西部废土.riv',
             title_en: 'Western Wasteland',
             title_zh: '西部废土',
             description: isZh
@@ -78,7 +78,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'stars',
-            src: '/web/assets/星星.riv',
+            src: './assets/星星.riv',
             title_en: 'Stars',
             title_zh: '星星',
             description: isZh
@@ -88,7 +88,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'firework',
-            src: '/web/assets/花火.riv',
+            src: './assets/花火.riv',
             title_en: 'Firework',
             title_zh: '花火',
             description: isZh
@@ -98,7 +98,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'text-swing',
-            src: '/web/assets/文字摆动.riv',
+            src: './assets/文字摆动.riv',
             title_en: 'Text Swing',
             title_zh: '文字摆动',
             description: isZh
@@ -108,7 +108,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'monster',
-            src: '/web/assets/小怪物.riv',
+            src: './assets/小怪物.riv',
             title_en: 'Little Monster',
             title_zh: '小怪物',
             description: isZh
