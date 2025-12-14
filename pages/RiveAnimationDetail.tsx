@@ -156,8 +156,8 @@ const RiveAnimationDetail: React.FC = () => {
 
                 {/* 新布局：正方形左右，16:9上下 */}
                 <div className={`flex gap-6 ${animation.aspectRatio === 'aspect-square'
-                        ? 'flex-col lg:flex-row lg:gap-6'  // 正方形：左右布局，间距缩小
-                        : 'flex-col'  // 16:9：上下布局
+                    ? 'flex-col lg:flex-row lg:gap-6'  // 正方形：左右布局，间距缩小
+                    : 'flex-col'  // 16:9：上下布局
                     }`}>
 
                     {/* 左侧/上方：动效画布 */}
@@ -168,18 +168,7 @@ const RiveAnimationDetail: React.FC = () => {
                         className={animation.aspectRatio === 'aspect-square' ? 'w-full lg:flex-[2]' : 'w-full'}
                     >
                         <div className={`relative bg-black/40 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 ${animation.aspectRatio} max-h-[70vh]`}>
-                            <div
-                                className="w-full h-full interactive-target"
-                                onClick={() => {
-                                    // 西部废土点击时顺序播放转场音效
-                                    if (id === 'western-wasteland') {
-                                        playSwipeIn();
-                                        setTimeout(() => {
-                                            playSwipeOut();
-                                        }, 800);
-                                    }
-                                }}
-                            >
+                            <div className="w-full h-full interactive-target">
                                 <RiveComponent className="w-full h-full" />
                             </div>
                         </div>
