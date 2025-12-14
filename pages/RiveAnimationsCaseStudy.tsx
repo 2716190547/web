@@ -68,7 +68,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
     const animations = [
         {
             id: 'western-wasteland',
-            src: './assets/西部废土.riv',
+            src: '/web/assets/西部废土.riv',
             title_en: 'Western Wasteland',
             title_zh: '西部废土',
             description: isZh
@@ -78,7 +78,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'stars',
-            src: './assets/星星.riv',
+            src: '/web/assets/星星.riv',
             title_en: 'Stars',
             title_zh: '星星',
             description: isZh
@@ -88,7 +88,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'firework',
-            src: './assets/花火.riv',
+            src: '/web/assets/花火.riv',
             title_en: 'Firework',
             title_zh: '花火',
             description: isZh
@@ -98,7 +98,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'text-swing',
-            src: './assets/文字摆动.riv',
+            src: '/web/assets/文字摆动.riv',
             title_en: 'Text Swing',
             title_zh: '文字摆动',
             description: isZh
@@ -108,7 +108,7 @@ const RiveAnimationsCaseStudy: React.FC = () => {
         },
         {
             id: 'monster',
-            src: './assets/小怪物.riv',
+            src: '/web/assets/小怪物.riv',
             title_en: 'Little Monster',
             title_zh: '小怪物',
             description: isZh

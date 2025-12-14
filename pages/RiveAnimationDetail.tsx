@@ -19,7 +19,7 @@ const RiveAnimationDetail: React.FC = () => {
     // Animation data
     const animationsData: Record<string, any> = {
         'western-wasteland': {
-            src: './assets/西部废土.riv',
+            src: '/web/assets/西部废土.riv',
             title: '西部废土',
             description: isZh
                 ? '荒凉的西部废土场景，末世风格氛围。'
@@ -28,7 +28,7 @@ const RiveAnimationDetail: React.FC = () => {
             aspectRatio: 'aspect-[16/9]'
         },
         'stars': {
-            src: './assets/星星.riv',
+            src: '/web/assets/星星.riv',
             title: '星星',
             description: isZh
                 ? '点击星星，或许会有不一样的变化！'
@@ -37,7 +37,7 @@ const RiveAnimationDetail: React.FC = () => {
             aspectRatio: 'aspect-square'
         },
         'firework': {
-            src: './assets/花火.riv',
+            src: '/web/assets/花火.riv',
             title: '花火',
             description: isZh
                 ? '绚丽的烟花动画，营造节日氛围。'
@@ -46,7 +46,7 @@ const RiveAnimationDetail: React.FC = () => {
             aspectRatio: 'aspect-square'
         },
         'text-swing': {
-            src: './assets/文字摆动.riv',
+            src: '/web/assets/文字摆动.riv',
             title: '文字摆动',
             description: isZh
                 ? '文字动态摆动效果，增添页面趣味性。'
@@ -55,7 +55,7 @@ const RiveAnimationDetail: React.FC = () => {
             aspectRatio: 'aspect-square'
         },
         'monster': {
-            src: './assets/小怪物.riv',
+            src: '/web/assets/小怪物.riv',
             title: '小怪物',
             description: isZh
                 ? '可爱的小怪物角色，丰富的表情和动作。'
