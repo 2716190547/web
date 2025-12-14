@@ -19,6 +19,24 @@ const projects = [
   },
   {
     id: 2,
+    title_en: "Ediantec",
+    title_zh: "依电科技",
+    category_en: "B2B WEB DESIGN",
+    category_zh: "B 端网页设计",
+    img: "./image/cover/Ediantec.png",
+    path: "/work/ediantec"
+  },
+  {
+    id: 3,
+    title_en: "Animation Design",
+    title_zh: "动效设计",
+    category_en: "SMOOTH INTERACTION EXPERIENCE",
+    category_zh: "流畅的交互效果体验！",
+    img: "./image/动效/花火.png",
+    path: "/work/rive-animations"
+  },
+  {
+    id: 4,
     title: "Cat Pi",
     category_en: "AI COMPANY WEBSITE",
     category_zh: "AI 公司官网",
@@ -26,32 +44,36 @@ const projects = [
     path: "/work/catpi"
   },
   {
-    id: 3,
-    title: "3D展示",
+    id: 5,
+    title_en: "3D Showcase",
+    title_zh: "3D展示",
     category_en: "3D WORKS SHOWCASE",
     category_zh: "部分3d 作品展示",
     img: "./image/cover/3D展示.png",
     path: "/work/3d-showcase"
   },
   {
-    id: 4,
-    title: "响应式网站设计",
+    id: 6,
+    title_en: "Responsive Web",
+    title_zh: "响应式网站设计",
     category_en: "RESPONSIVE WEB DESIGN",
     category_zh: "多端适配设计",
     img: "./image/cover/响应式网站设计.png",
     path: "/work/responsive-web"
   },
   {
-    id: 5,
-    title: "运营活动设计",
+    id: 7,
+    title_en: "Campaign Design",
+    title_zh: "运营活动设计",
     category_en: "CAMPAIGN DESIGN",
     category_zh: "咚咚历程挑战",
     img: "./image/cover/运营活动设计.png",
     path: "/work/campaign"
   },
   {
-    id: 6,
-    title: "鱿鲜烧",
+    id: 8,
+    title_en: "Youxianshao",
+    title_zh: "鱿鲜烧",
     category_en: "BRAND VISUAL DESIGN",
     category_zh: "品牌视觉设计",
     img: "./image/cover/品牌视觉设计.png",
@@ -69,7 +91,7 @@ const Work: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Header */}
-        <div className="relative pt-10 pb-6">
+        <div className="relative pt-10 pb-12 md:pb-16">
           <div className="absolute top-0 left-0 -translate-y-1/2 -translate-x-10 opacity-[0.02] font-display font-black text-[20vw] leading-none text-white pointer-events-none select-none">
             {t.work.bg_title}
           </div>
@@ -95,8 +117,8 @@ const Work: React.FC = () => {
           </div>
         </div>
 
-        {/* Project Grid - OPTIMIZED GAP */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        {/* Project Grid - 增加间距 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {projects.map((item, index) => (
             <motion.div
               key={item.id}
@@ -112,12 +134,23 @@ const Work: React.FC = () => {
 
                     {/* Image Section - Top */}
                     <div className="relative w-full aspect-video overflow-hidden">
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                      />
+                      {item.img.endsWith('.riv') ? (
+                        // Special placeholder for Rive animation card
+                        <div className="w-full h-full bg-gradient-to-br from-neon/20 via-cyber/10 to-purple-500/20 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="text-6xl mb-4">✨</div>
+                            <div className="font-display font-black text-2xl text-white">RIVE</div>
+                            <div className="font-mono text-sm text-neon">ANIMATIONS</div>
+                          </div>
+                        </div>
+                      ) : (
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        />
+                      )}
 
                       {/* Button positioned at bottom right of image area */}
                       <div className="absolute bottom-4 right-4 z-20 overflow-hidden">
@@ -137,11 +170,11 @@ const Work: React.FC = () => {
                     {/* Content Section - Bottom */}
                     <div className="flex flex-col items-start p-6 md:p-8 bg-gradient-to-b from-black/20 to-black/40 flex-grow">
                       <h3 className="font-display font-black text-3xl md:text-4xl text-white group-hover:text-neon transition-colors tracking-tight leading-none mb-3">
-                        {item.title}
+                        {language === 'zh' ? (item.title_zh || item.title) : (item.title_en || item.title)}
                       </h3>
-                      <div className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-neon rounded-full"></span>
-                        <span className="font-mono font-bold text-xs md:text-sm text-gray-500 group-hover:text-white transition-colors tracking-wider">
+                      <div className="flex items-center gap-3 w-full">
+                        <span className="w-2 h-2 bg-neon rounded-full flex-shrink-0"></span>
+                        <span className="font-mono font-bold text-xs md:text-sm text-gray-500 group-hover:text-white transition-colors tracking-wider break-words">
                           {language === 'zh' ? item.category_zh : item.category_en}
                         </span>
                       </div>

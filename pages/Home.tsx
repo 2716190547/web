@@ -58,6 +58,15 @@ const projects = [
   },
   {
     id: 2,
+    title: "ANIMATION",
+    category_en: "ANIMATION DESIGN",
+    category_zh: "动效设计",
+    year: "2024",
+    img: "./image/动效/花火.png",
+    path: "/work/rive-animations"
+  },
+  {
+    id: 3,
     title: "CAT PI",
     category_en: "AI COMPANY SITE",
     category_zh: "AI 公司官网",
@@ -66,22 +75,13 @@ const projects = [
     path: "/work/catpi"
   },
   {
-    id: 3,
+    id: 4,
     title: "3D SHOWCASE",
     category_en: "3D WORKS",
     category_zh: "3D 作品展示",
     year: "2024",
     img: "./image/cover/3D展示.png",
     path: "/work/3d-showcase"
-  },
-  {
-    id: 4,
-    title: "RESPONSIVE",
-    category_en: "WEB DESIGN",
-    category_zh: "响应式设计",
-    year: "2024",
-    img: "./image/cover/响应式网站设计.png",
-    path: "/work/responsive-web"
   },
 ];
 

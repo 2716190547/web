@@ -7,20 +7,20 @@ import { InteractiveTitle } from '../components/InteractiveTitle';
 import { BackgroundShapes } from '../components/BackgroundShapes';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const BrandVisualCaseStudy: React.FC = () => {
+const EdiantecCaseStudy: React.FC = () => {
     const { language } = useLanguage();
 
     const isZh = language === 'zh';
 
     const content = {
         hero: {
-            year: "2024",
-            title: "YOUXIANSHAO",
-            subtitle: isZh ? "品牌视觉设计" : "BRAND VISUAL DESIGN",
+            year: "2025",
+            title: "EDIANTEC",
+            subtitle: isZh ? "B 端网页设计" : "B2B WEB DESIGN",
             desc: isZh
-                ? "鱿鲜烧餐饮品牌全套视觉设计，从品牌标识到应用系统，打造独特的品牌视觉形象与市场认知度。"
-                : "Complete visual design for Youxianshao food & beverage brand, from brand identity to application system, creating unique brand visual image and market recognition.",
-            brand: "F&B Brand"
+                ? "依电科技是一家专注于智能电力解决方案的公司，此项目为其设计了后台管理系统及大屏可视化界面，提升数据展示与操作效率。"
+                : "Ediantec is a company focused on intelligent power solutions. This project designed backend management system and large-screen visualization interface to improve data display and operational efficiency.",
+            brand: "Ediantec"
         }
     };
 
@@ -54,7 +54,7 @@ const BrandVisualCaseStudy: React.FC = () => {
                             <span className="bg-neon/10 px-3 py-1 rounded-full">{content.hero.brand}</span>
                             <span>{content.hero.year}</span>
                             <span className="w-12 h-[1px] bg-neon/50"></span>
-                            <span>BRANDING</span>
+                            <span>B2B DESIGN</span>
                         </div>
 
                         <InteractiveTitle text={content.hero.title} size="large" className="text-white text-[12vw] leading-none" />
@@ -78,7 +78,7 @@ const BrandVisualCaseStudy: React.FC = () => {
                     className="w-full mb-20"
                 >
                     <div className="flex flex-col gap-6">
-                        {[54, 55, 56, 57, 58, 59].map((num, index) => (
+                        {['04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'].map((num, index) => (
                             <motion.div
                                 key={num}
                                 initial={{ opacity: 0, y: 20 }}
@@ -87,8 +87,8 @@ const BrandVisualCaseStudy: React.FC = () => {
                                 className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-neon/30 transition-all duration-300"
                             >
                                 <img
-                                    src={`./image/品牌视觉设计/${num}.png`}
-                                    alt={`Brand Visual Design - ${num}`}
+                                    src={`./image/Ediantec/${num}.png`}
+                                    alt={`Ediantec Case Study - ${num}`}
                                     className="w-full h-auto object-contain"
                                     loading={index < 3 ? 'eager' : 'lazy'}
                                 />
@@ -102,4 +102,4 @@ const BrandVisualCaseStudy: React.FC = () => {
     );
 };
 
-export default BrandVisualCaseStudy;
+export default EdiantecCaseStudy;

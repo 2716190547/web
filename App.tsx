@@ -8,11 +8,14 @@ import Work from './pages/Work';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import AirBrushCaseStudy from './pages/AirBrushCaseStudy';
+import EdiantecCaseStudy from './pages/EdiantecCaseStudy';
 import CatPiCaseStudy from './pages/CatPiCaseStudy';
 import ThreeDShowcaseCaseStudy from './pages/ThreeDShowcaseCaseStudy';
 import ResponsiveWebCaseStudy from './pages/ResponsiveWebCaseStudy';
 import CampaignDesignCaseStudy from './pages/CampaignDesignCaseStudy';
 import BrandVisualCaseStudy from './pages/BrandVisualCaseStudy';
+import RiveAnimationsCaseStudy from './pages/RiveAnimationsCaseStudy';
+import RiveAnimationDetail from './pages/RiveAnimationDetail';
 import CustomCursor from './components/CustomCursor';
 import { PageTransition } from './components/PageTransition';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -116,6 +119,30 @@ const AnimatedRoutes: React.FC = () => {
           element={
             <PageTransition>
               <AirBrushCaseStudy />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/work/ediantec"
+          element={
+            <PageTransition>
+              <EdiantecCaseStudy />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/work/rive-animations"
+          element={
+            <PageTransition>
+              <RiveAnimationsCaseStudy />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/work/rive-animations/:id"
+          element={
+            <PageTransition>
+              <RiveAnimationDetail />
             </PageTransition>
           }
         />

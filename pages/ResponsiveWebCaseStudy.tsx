@@ -28,11 +28,15 @@ const ResponsiveWebCaseStudy: React.FC = () => {
         <div className="min-h-screen bg-transparent relative z-10 pt-24 pb-20 px-4 md:px-8 overflow-x-hidden">
             <BackgroundShapes />
 
-            {/* Back Button */}
+            {/* Back Button - 统一样式 */}
             <div className="max-w-7xl mx-auto mb-12 relative z-20">
-                <Link to="/work" className="inline-flex items-center gap-2 text-gray-500 hover:text-neon transition-colors font-mono text-sm uppercase tracking-widest interactive-target">
-                    <ArrowLeft className="w-4 h-4" />
-                    {isZh ? "返回作品集" : "Back to Archive"}
+                <Link to="/work" className="interactive-target inline-block">
+                    <div className="group relative px-6 py-3 border-2 border-white/20 bg-transparent text-white font-display font-black text-xs uppercase tracking-widest overflow-hidden transition-all rounded-[2rem] hover:border-neon inline-flex items-center gap-3">
+                        {/* Fill Effect */}
+                        <div className="absolute inset-0 bg-neon -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                        <ArrowLeft className="w-4 h-4 relative z-10 group-hover:text-black transition-colors duration-300" />
+                        <span className="relative z-10 group-hover:text-black transition-colors duration-300">{isZh ? "返回作品集" : "Back to Archive"}</span>
+                    </div>
                 </Link>
             </div>
 

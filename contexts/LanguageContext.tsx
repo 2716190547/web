@@ -54,6 +54,7 @@ interface Translations {
     jobs: {
       meitu: { role: string; desc: string; };
       gengher: { role: string; desc: string; };
+      yidian: { role: string; desc: string; }; // 新增依电科技工作经历
     };
   };
   contact: {
@@ -139,13 +140,17 @@ const translations: Record<Language, Translations> = {
       select_clients: "VISUAL SIGNAL",
       system_capabilities: "System_Capabilities",
       jobs: {
-        meitu: { 
-          role: "OVERSEAS DESIGN / AIRBRUSH", 
-          desc: "Familiar with product background and user needs. Participated in product quality improvement plans. Produced design schemes, optimized processes and specs. Independent interface component production." 
+        meitu: {
+          role: "OVERSEAS DESIGN / AIRBRUSH",
+          desc: "Familiar with product background and user needs. Participated in product quality improvement plans. Produced design schemes, optimized processes and specs. Independent interface component production."
         },
-        gengher: { 
-          role: "UI DESIGN / SIX FEET", 
-          desc: "Researched and produced the 'Mine' section. Participated in formulating and optimizing processes and design specifications. Independent icon production and gear purchase section." 
+        gengher: {
+          role: "UI DESIGN / SIX FEET",
+          desc: "Researched and produced the 'Mine' section. Participated in formulating and optimizing processes and design specifications. Independent icon production and gear purchase section."
+        },
+        yidian: {
+          role: "UI DESIGN / YIDIAN TECH",
+          desc: "Research and organize existing issues. Build a project component library, refactor the existing UJI backend, and optimize visual/interaction issues. Combine with company product requirements to build an adaptive modular design."
         }
       }
     },
@@ -155,7 +160,7 @@ const translations: Record<Language, Translations> = {
       subtitle_2: "RESPONSE TIME: < 24 HOURS",
       labels: { mail: 'MAIL', wechat: 'WECHAT', phone: 'PHONE', copied: 'COPIED' },
       resume_btn: "DOWNLOAD RESUME",
-      resume_size: "PDF • 2.5 MB",
+      resume_size: "PDF • 618 KB",
       stats: { encryption: "ENCRYPTION", location: "LOCATION", status: "STATUS", available: "AVAILABLE" },
       ai: {
         title: "SEAN_AI_TWIN // v2.5",
@@ -220,13 +225,17 @@ const translations: Record<Language, Translations> = {
       select_clients: "视觉信号",
       system_capabilities: "系统能力",
       jobs: {
-        meitu: { 
-          role: "Airbrush移动端 海外设计", 
-          desc: "前期:熟悉产品背景，了解用户需求以及偏好，参与制定可行的产品品质提升方案实现版本优化。中期:产出设计方案，参与制定，完善，优化流程和设计规范，独立完成界面组件制作。后期:根据存在问题不断跟进优化界面，修改完善交互逻辑。" 
+        meitu: {
+          role: "Airbrush移动端 海外设计",
+          desc: "前期:熟悉产品背景，了解用户需求以及偏好，参与制定可行的产品品质提升方案实现版本优化。中期:产出设计方案，参与制定，完善，优化流程和设计规范，独立完成界面组件制作。后期:根据存在问题不断跟进优化界面，修改完善交互逻辑。"
         },
-        gengher: { 
-          role: "六只脚移动端 UI设计", 
-          desc: "调研产出页面“我的”部分板块。参与制定，完善，优化流程和设计规范，独立完成界面icon制作，装备购板块部分。根据存在问题不断跟进优化界面，修改交互操作，完善核心链路的流程。" 
+        gengher: {
+          role: "六只脚移动端 UI设计",
+          desc: "调研产出页面“我的”部分板块。参与制定，完善，优化流程和设计规范，独立完成界面icon制作，装备购板块部分。根据存在问题不断跟进优化界面，修改交互操作，完善核心链路的流程。"
+        },
+        yidian: {
+          role: "深圳依电科技 UI设计",
+          desc: "调研并梳理现有问题。建设项目组件库，重构现有后台UJI，优化视觉/交互等问题。结合公司产品需求，搭建自适应的模块化设计。"
         }
       }
     },
@@ -236,7 +245,7 @@ const translations: Record<Language, Translations> = {
       subtitle_2: "响应时间：< 24 小时",
       labels: { mail: '邮箱', wechat: '微信', phone: '电话', copied: '已复制' },
       resume_btn: "下载简历",
-      resume_size: "PDF • 2.5 MB",
+      resume_size: "PDF • 618 KB",
       stats: { encryption: "加密", location: "位置", status: "状态", available: "可用" },
       ai: {
         title: "肖恩AI分身 // v2.5",
